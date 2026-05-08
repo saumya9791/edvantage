@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EdVantage — Learn Without Limits</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER / NAVBAR ===================== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+
+      <a href="#" class="logo">
+        <span class="logo__icon">&#9671;</span>
+        <span class="logo__text">Ed<strong>Vantage</strong></span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#hero"     class="nav__link">Home</a>
+        <a href="#courses"  class="nav__link">Courses</a>
+        <a href="#features" class="nav__link">Why Us</a>
+        <a href="#footer"   class="nav__link">Contact</a>
+      </nav>
+
+      <div class="header__actions">
+        <!-- Shown when logged OUT -->
+        <a href="javascript:void(0)" class="btn btn--outline" id="loginBtn" onclick="showLogin()">Log In</a>
+
+        <!-- ── User Dropdown (shown when logged IN) ── -->
+        <div class="user-menu" id="userMenu" style="display:none; position:relative;">
+          <button class="user-menu__trigger" id="userMenuTrigger" onclick="toggleUserDropdown()">
+            <span class="user-menu__avatar" id="userAvatar">U</span>
+            <span class="user-menu__name"   id="userMenuName">User</span>
+            <span class="user-menu__caret">▾</span>
+          </button>
+
+          <!-- Dropdown panel -->
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown__header">
+              <strong id="dropdownName">User</strong>
+              <span   id="dropdownEmail" class="user-dropdown__email">user@email.com</span>
+              <span   id="dropdownRole"  class="user-dropdown__role-badge">user</span>
+            </div>
+            <hr class="user-dropdown__divider" />
+
+            <button class="user-dropdown__item" onclick="openProfileModal()">
+              <span>👤</span> Profile
+            </button>
+            <button class="user-dropdown__item" onclick="showToast('My Learning coming soon!')">
+              <span>📚</span> My Learning
+            </button>
+            <button class="user-dropdown__item" onclick="openSettingsModal()">
+              <span>⚙️</span> Account Settings
+            </button>
+
+            <!-- Admin Dashboard — only visible if role === 'admin' -->
+            <button class="user-dropdown__item user-dropdown__item--admin"
+                    id="adminDashboardBtn" style="display:none;" onclick="openAdminDashboard()">
+              <span>🛡️</span> Admin Dashboard
+            </button>
+
+            <hr class="user-dropdown__divider" />
+            <button class="user-dropdown__item user-dropdown__item--danger" onclick="logoutUser()">
+              <span>🚪</span> Logout
+            </button>
+          </div>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#hero"     class="mobile-nav__link">Home</a>
+      <a href="#courses"  class="mobile-nav__link">Courses</a>
+      <a href="#features" class="mobile-nav__link">Why Us</a>
+      <a href="#footer"   class="mobile-nav__link">Contact</a>
+      <a href="javascript:void(0)" class="btn btn--solid mt-1" onclick="showLogin()">Log In</a>
+    </div>
+  </header>
+
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <section class="hero" id="hero">
+    <div class="blob blob--1"></div>
+    <div class="blob blob--2"></div>
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <span class="hero__badge">India's #1 EdTech Platform</span>
+        <h1 class="hero__title">
+          Unlock Your <br /><em>Potential,</em><br />One Course at a Time.
+        </h1>
+        <p class="hero__tagline">
+          Expert-led courses in Engineering, Commerce, UPSC &amp; more.
+          Learn at your pace. Achieve at your best.
+        </p>
+        <div class="hero__cta-group">
+          <a href="#courses" class="btn btn--solid btn--lg">Explore Courses</a>
+          <a href="#features" class="btn btn--ghost btn--lg">How It Works</a>
+        </div>
+        <div class="hero__trust">
+          <div class="trust-item"><span class="trust-num">2M+</span><span class="trust-label">Learners</span></div>
+          <div class="trust-divider"></div>
+          <div class="trust-item"><span class="trust-num">500+</span><span class="trust-label">Courses</span></div>
+          <div class="trust-divider"></div>
+          <div class="trust-item"><span class="trust-num">98%</span><span class="trust-label">Success Rate</span></div>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <div class="hero__card-mockup">
+          <div class="mockup__header">
+            <span class="mockup__dot red"></span>
+            <span class="mockup__dot yellow"></span>
+            <span class="mockup__dot green"></span>
+            <span class="mockup__title">My Dashboard</span>
+          </div>
+          <div class="mockup__progress-block">
+            <p class="mockup__label">JEE Advanced Prep</p>
+            <div class="mockup__bar"><div class="mockup__fill" style="width:72%"></div></div>
+            <span class="mockup__percent">72%</span>
+          </div>
+          <div class="mockup__progress-block">
+            <p class="mockup__label">UPSC GS Paper I</p>
+            <div class="mockup__bar"><div class="mockup__fill" style="width:45%"></div></div>
+            <span class="mockup__percent">45%</span>
+          </div>
+          <div class="mockup__progress-block">
+            <p class="mockup__label">Python for Data Science</p>
+            <div class="mockup__bar"><div class="mockup__fill" style="width:88%"></div></div>
+            <span class="mockup__percent">88%</span>
+          </div>
+          <div class="mockup__streak">🔥 7-Day Streak — Keep it up!</div>
+        </div>
+        <div class="float-badge float-badge--1">&#127775; Top Rated</div>
+        <div class="float-badge float-badge--2">&#9989; Certificate Ready</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================== FEATURES SECTION ===================== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Why EdVantage</span>
+        <h2 class="section-title">Everything You Need to Succeed</h2>
+      </div>
+      <div class="features__grid">
+        <div class="feature-card"><div class="feature-card__icon">&#127891;</div><h3>Expert Instructors</h3><p>Learn from India's top educators, IIT alumni, and industry professionals.</p></div>
+        <div class="feature-card"><div class="feature-card__icon">&#128250;</div><h3>HD Video Lectures</h3><p>Crystal-clear, downloadable video lectures for offline learning on any device.</p></div>
+        <div class="feature-card"><div class="feature-card__icon">&#128202;</div><h3>Live Progress Tracking</h3><p>Personalised dashboards track your progress with AI-powered insights.</p></div>
+        <div class="feature-card"><div class="feature-card__icon">&#127942;</div><h3>Verified Certificates</h3><p>Industry-recognised certificates shareable directly to your LinkedIn profile.</p></div>
+        <div class="feature-card"><div class="feature-card__icon">&#128172;</div><h3>Doubt Resolution</h3><p>Get doubts answered within minutes by subject-matter experts.</p></div>
+        <div class="feature-card"><div class="feature-card__icon">&#128176;</div><h3>Flexible Pricing</h3><p>Monthly, annual, or one-time plans with EMI options. No hidden costs.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================== COURSES SECTION ===================== -->
+  <section class="courses" id="courses">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Featured Courses</span>
+        <h2 class="section-title">Find Your Perfect Course</h2>
+        <p class="section-subtitle">Handpicked by our academic council. Updated for 2025.</p>
+      </div>
+      <div class="search-wrapper">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="searchInput" class="search-input"
+               placeholder="Search courses by name or category…" aria-label="Search courses" />
+        <span class="search-count" id="searchCount"></span>
+      </div>
+      <div class="courses__grid" id="coursesGrid"></div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <span class="empty-icon">&#128214;</span>
+        <p>No courses found. Try a different keyword.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================== TESTIMONIAL BANNER ===================== -->
+  <section class="testimonial-banner">
+    <div class="container">
+      <blockquote class="testimonial">
+        <p class="testimonial__quote">
+          "EdVantage's structured content and live mentorship helped me crack JEE Advanced with an AIR of 312.
+          The best investment I ever made."
+        </p>
+        <cite class="testimonial__author">
+          <span class="author__name">Arjun Sharma</span>
+          <span class="author__detail">JEE Advanced 2024 — AIR 312 | IIT Bombay</span>
+        </cite>
+      </blockquote>
+    </div>
+  </section>
+
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="footer">
+    <div class="container footer__inner">
+      <div class="footer__col footer__col--brand">
+        <a href="#" class="logo logo--light">
+          <span class="logo__icon">&#9671;</span>
+          <span class="logo__text">Ed<strong>Vantage</strong></span>
+        </a>
+        <p class="footer__tagline">A product of <strong>RR Finco</strong>.<br />Empowering learners across India since 2020.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Twitter">&#120143;</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+          <a href="#" class="social-link" aria-label="YouTube">&#9654;</a>
+          <a href="#" class="social-link" aria-label="Instagram">&#128247;</a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">Courses</h4>
+        <ul class="footer__list">
+          <li><a href="#">JEE / NEET</a></li><li><a href="#">UPSC / SSC</a></li>
+          <li><a href="#">CA / CMA</a></li><li><a href="#">Coding &amp; Tech</a></li>
+          <li><a href="#">Spoken English</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">Company</h4>
+        <ul class="footer__list">
+          <li><a href="#">About EdVantage</a></li><li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li><li><a href="#">Blog</a></li><li><a href="#">Investors</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">Support</h4>
+        <ul class="footer__list">
+          <li><a href="#">Help Centre</a></li><li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li><li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <p>&copy; 2025 <strong>RR Finco</strong>. All rights reserved. EdVantage is a registered trademark.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ====================================================
+       MODAL 1 — LOGIN / REGISTER
+       (Your original structure — untouched)
+  ===================================================== -->
+  <div id="loginModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <h3 class="modal-box__title" id="modalTitle">Log In</h3>
+      <form id="authForm" novalidate>
+        <!-- Name (register only) -->
+        <input type="text" id="userName" placeholder="Full Name"
+               style="display:none;" class="modal-input" />
+
+        <!-- Email -->
+        <input type="email" id="userEmail" placeholder="Email"
+               required class="modal-input" />
+
+        <!-- Password + toggle -->
+        <div class="input-group">
+          <input type="password" id="userPass" placeholder="Password"
+                 required class="modal-input" />
+          <span class="pass-toggle" onclick="togglePassword('userPass', this)">SHOW</span>
+        </div>
+
+        <!-- Confirm Password (register only) -->
+        <div id="confirmPassWrapper" style="display:none;" class="input-group">
+          <input type="password" id="confirmPass" placeholder="Confirm Password"
+                 class="modal-input" />
+          <span class="pass-toggle" onclick="togglePassword('confirmPass', this)">SHOW</span>
+        </div>
+
+        <!-- Forgot Password link (login mode only) -->
+        <p id="forgotRow" style="text-align:right; margin-bottom:.5rem;">
+          <a href="javascript:void(0)" onclick="showForgotPassword()"
+             style="font-size:.8rem; color:#6366f1; text-decoration:none;">Forgot Password?</a>
+        </p>
+
+        <button type="submit" id="submitBtn" class="btn btn--solid modal-box__cta">Log In</button>
+
+        <p class="modal-box__switch">
+          <span id="toggleText">New user?</span>&nbsp;
+          <a href="javascript:void(0)" onclick="toggleAuth()" id="toggleLink"
+             style="color:#6366f1; font-weight:700; text-decoration:none;">Register Here</a>
+        </p>
+        <button type="button" onclick="closeModal()" class="modal-box__cancel">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ====================================================
+       MODAL 2 — PROFILE (view / edit)
+  ===================================================== -->
+  <div id="profileModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <h3 class="modal-box__title">👤 My Profile</h3>
+      <p class="modal-box__subtitle">Update your personal information</p>
+
+      <label class="modal-label">Full Name</label>
+      <input type="text" id="profileName" class="modal-input" placeholder="Your Name" />
+
+      <label class="modal-label">Email Address</label>
+      <input type="email" id="profileEmail" class="modal-input" placeholder="Your Email" />
+
+      <label class="modal-label">Role</label>
+      <input type="text" id="profileRole" class="modal-input" readonly
+             style="background:#f5f3ff; color:#6345e0; font-weight:700; cursor:not-allowed;" />
+
+      <button class="btn btn--solid modal-box__cta" onclick="saveProfile()">
+        Save Changes
+      </button>
+      <button type="button" onclick="closeAllModals()" class="modal-box__cancel">Close</button>
+    </div>
+  </div>
+
+
+  <!-- ====================================================
+       MODAL 3 — ACCOUNT SETTINGS
+  ===================================================== -->
+  <div id="settingsModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box modal-box--wide">
+      <h3 class="modal-box__title">⚙️ Account Settings</h3>
+
+      <!-- Privacy -->
+      <div class="settings-section">
+        <h4 class="settings-section__title">🔒 Privacy</h4>
+        <div class="settings-toggle-row">
+          <div>
+            <p class="settings-toggle-row__label">Show my profile publicly</p>
+            <p class="settings-toggle-row__desc">Allow other learners to see your progress</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="privacyPublic" checked />
+            <span class="toggle-switch__track"></span>
+          </label>
+        </div>
+        <div class="settings-toggle-row">
+          <div>
+            <p class="settings-toggle-row__label">Share activity with instructors</p>
+            <p class="settings-toggle-row__desc">Instructors can see your watch time</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="privacyActivity" />
+            <span class="toggle-switch__track"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Security -->
+      <div class="settings-section">
+        <h4 class="settings-section__title">🛡️ Security</h4>
+        <div class="settings-toggle-row">
+          <div>
+            <p class="settings-toggle-row__label">Two-Factor Authentication</p>
+            <p class="settings-toggle-row__desc">Adds an extra layer of login security</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="security2fa" />
+            <span class="toggle-switch__track"></span>
+          </label>
+        </div>
+        <div class="settings-toggle-row">
+          <div>
+            <p class="settings-toggle-row__label">Login notifications</p>
+            <p class="settings-toggle-row__desc">Get emailed on new device logins</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="securityNotify" checked />
+            <span class="toggle-switch__track"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="settings-section">
+        <h4 class="settings-section__title">🔔 Notifications</h4>
+        <div class="settings-toggle-row">
+          <div>
+            <p class="settings-toggle-row__label">Course updates & new lectures</p>
+            <p class="settings-toggle-row__desc">Be notified when new content is added</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="notifyCourses" checked />
+            <span class="toggle-switch__track"></span>
+          </label>
+        </div>
+        <div class="settings-toggle-row">
+          <div>
+            <p class="settings-toggle-row__label">Promotional emails</p>
+            <p class="settings-toggle-row__desc">Discounts, flash sales, and offers</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="notifyPromo" />
+            <span class="toggle-switch__track"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Danger Zone: Delete Account -->
+      <div class="settings-section settings-section--danger">
+        <h4 class="settings-section__title" style="color:#c53030;">⚠️ Danger Zone</h4>
+        <p style="font-size:.85rem; color:#742a2a; margin-bottom:1rem;">
+          Deleting your account is <strong>permanent and irreversible</strong>.
+          All your data, progress, and certificates will be lost.
+        </p>
+        <button class="btn-danger" onclick="initiateDeleteAccount()">
+          🗑️ Delete My Account
+        </button>
+      </div>
+
+      <button type="button" onclick="closeAllModals()" class="modal-box__cancel" style="margin-top:1rem;">
+        Close
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ====================================================
+       MODAL 4 — DELETE ACCOUNT CONFIRMATION
+  ===================================================== -->
+  <div id="deleteModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box modal-box--danger">
+      <div style="font-size:3rem; margin-bottom:.5rem;">🗑️</div>
+      <h3 class="modal-box__title" style="color:#c53030;">Delete Account?</h3>
+      <p style="font-size:.88rem; color:#666; margin-bottom:1.25rem; line-height:1.6;">
+        This will <strong>permanently delete</strong> your account and all associated data.
+        This action <u>cannot be undone</u>.
+      </p>
+
+      <label class="modal-label">Enter your password to confirm</label>
+      <div class="input-group">
+        <input type="password" id="deleteConfirmPass" class="modal-input"
+               placeholder="Your current password" />
+        <span class="pass-toggle" onclick="togglePassword('deleteConfirmPass', this)">SHOW</span>
+      </div>
+
+      <div style="display:flex; gap:.75rem; margin-top:1rem;">
+        <button class="btn-danger" style="flex:1;" onclick="confirmDeleteAccount()">
+          Yes, Delete Forever
+        </button>
+        <button class="btn btn--outline" style="flex:1;" onclick="closeAllModals()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ====================================================
+       MODAL 5 — ADMIN DASHBOARD
+  ===================================================== -->
+  <div id="adminModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box modal-box--wide">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem;">
+        <h3 class="modal-box__title" style="margin:0;">🛡️ Admin Dashboard</h3>
+        <span class="user-dropdown__role-badge" style="background:#1a0a5e;">admin</span>
+      </div>
+
+      <p style="font-size:.85rem; color:#666; margin-bottom:1.25rem;">
+        All registered users on the EdVantage platform — RR Finco.
+      </p>
+
+      <!-- Summary cards -->
+      <div class="admin-stats" id="adminStats">
+        <div class="admin-stat"><span id="totalUsers">—</span><small>Total Users</small></div>
+        <div class="admin-stat"><span id="totalAdmins">—</span><small>Admins</small></div>
+        <div class="admin-stat"><span id="totalRegular">—</span><small>Regular Users</small></div>
+      </div>
+
+      <!-- index_5.html mein Table se upar ye dalo -->
+<div style="margin-bottom: 15px;">
+  <input type="text" id="adminUserSearch" placeholder="Search by name or email..." 
+         style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;"
+         onkeyup="filterAdminUsers()"> <!-- 🔥 Har keyword par filter chalega -->
+</div>
+
+      <!-- Users table -->
+      <div class="admin-table-wrapper">
+        <table class="admin-table" id="adminTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Joined</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody">
+            <tr><td colspan="5" style="text-align:center; padding:2rem; color:#999;">Loading users…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button type="button" onclick="closeAllModals()" class="modal-box__cancel" style="margin-top:1rem;">
+        Close Dashboard
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ====================================================
+       TOAST NOTIFICATION (global)
+  ===================================================== -->
+  <div id="toast" class="toast" style="display:none;"></div>
+
+
+  <!-- Back-to-top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8679;</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
