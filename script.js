@@ -44,7 +44,7 @@
 // ──────────────────────────────────────────────────────────────
 
 // Local testing ke liye localhost:5000 use karo
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://edvantage-sql1.onrender.com";
 
 /** Cached courses — populated once by fetchCourses() */
 let cachedCourses = [];
